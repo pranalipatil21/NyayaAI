@@ -23,6 +23,7 @@ Action plan / next steps
 ⚠️ Disclaimer: NyayaAI is an educational tool and does not provide formal legal advice. Always consult a qualified lawyer for legal proceedings.
 
 🧠 Core Features
+
 ✅ Scenario-Based Reasoning
 
 Unlike basic search, NyayaAI understands a user’s grievance and maps it to specific Articles.
