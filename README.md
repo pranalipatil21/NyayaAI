@@ -1,84 +1,152 @@
-Part 1: Strategic Questions to Ask NyayaAI
+⚖️ NyayaAI — Constitutional Problem Solver (India)
 
-To test if your AI is thinking like a lawyer, ask these Scenario-Based questions. They test the AI’s ability to map a messy human problem to a specific Constitutional Article.
+NyayaAI is a professional-grade Retrieval-Augmented Generation (RAG) system designed to empower Indian citizens by providing actionable legal guidance grounded in the Constitution of India.
 
-1. Labor & Wages (The "Economic Justice" Test)[1]
-
-Question: "I have been working as a driver for 4 months, but my owner has not paid my salary and is threatening to fire me if I ask for it. Does the Constitution protect me?"
-
-Expected Logic: AI should link this to Article 23 (Prohibition of forced labor/begar) and Article 21 (Right to Livelihood).[1][2]
-
-2. Police & Liberty (The "Personal Freedom" Test)
-
-Question: "The police took my brother to the station 30 hours ago without telling us why, and they haven't taken him to a judge. Is this legal?"
-
-Expected Logic: AI should cite Article 22 (Right to be produced before a magistrate within 24 hours) and Article 21.[1][2][3]
-
-3. Discrimination (The "Social Equality" Test)[2]
-
-Question: "A local government school is refusing to admit my daughter because of our caste/religion. What can I do?"
-
-Expected Logic: AI should cite Article 15 (Prohibition of discrimination) and Article 21A (Right to Education).[1][2]
-
-4. Gender & Privacy (The "Modern Rights" Test)[1]
-
-Question: "Can the government force me to share my private phone data without a valid reason?"
-
-Expected Logic: AI should mention the Right to Privacy as part of Article 21 (based on the Puttaswamy judgment).[2]
-
-Part 2: Professional README Summary
-
-You can copy and paste this into your README.md file.[1][2] It is written in a way that will impress recruiters or stakeholders.
-
-⚖️ NyayaAI: Constitutional Problem Solver
-
-NyayaAI is a professional-grade Retrieval-Augmented Generation (RAG) system designed to empower Indian citizens by providing actionable legal guidance based on the Constitution of India.[1][2]
+Most citizens find legal language intimidating. NyayaAI bridges this gap by allowing users to describe real-life problems (like unpaid wages, police misconduct, or discrimination) in plain English and receive responses mapped to relevant Constitutional Articles.
 
 🚀 Project Overview
 
-Most citizens find legal text intimidating.[1][2] NyayaAI bridges this gap by allowing users to describe daily-life problems (like unpaid wages or police misconduct) in plain English and receiving answers grounded in Constitutional Law.[1][2]
+NyayaAI helps users:
 
-🧠 Core Features[1][2][3][4][5][6][7][8][9]
+Explain problems in simple language
 
-Scenario-Based Reasoning: Unlike basic search, this system maps human grievances to specific legal Articles.[1][2]
+Automatically map the scenario to relevant Constitutional Articles
 
-Article Integrity (Parent Document Retrieval): Uses advanced chunking to ensure that large legal articles are never "cut in half," preserving the full context for the LLM.[2]
+Get a structured response with:
 
-Lightning Fast Inference: Powered by Groq’s LPU technology for sub-second response times.[1][2]
+Article citations
 
-Multilingual Potential: Built on Llama 3.3, capable of understanding and responding in multiple Indian languages.[1][2]
+Legal reasoning
 
-🛠️ The "Free Power Stack" (Tech Stack)[1][2]
+Action plan / next steps
 
-Orchestration: LangChain
+⚠️ Disclaimer: NyayaAI is an educational tool and does not provide formal legal advice. Always consult a qualified lawyer for legal proceedings.
 
-LLM (Reasoning): Groq (Llama-3.3-70b-versatile)[1][2]
+🧠 Core Features
+✅ Scenario-Based Reasoning
 
-Embeddings (Semantic Search): Google Gemini (text-embedding-004)
+Unlike basic search, NyayaAI understands a user’s grievance and maps it to specific Articles.
 
-Vector Store: ChromaDB (Local/In-Memory)[1][2]
+✅ Article Integrity (Parent Document Retrieval)
 
-UI Framework: Streamlit[1][2][10]
+Uses advanced chunking to ensure Articles are not “cut in half,” preserving full legal context.
 
-🛠️ Technical Implementation
+✅ Lightning Fast Inference
 
-Data Ingestion: Processed the official Constitution of India PDF using PyPDFLoader.
+Powered by Groq’s LPU technology for sub-second response times.
 
-Recursive Chunking: Implemented a two-tier splitting strategy (Parent-Child) to balance search accuracy with legal context.
+✅ Multilingual Potential
 
-Semantic Mapping: Converted legal text into high-dimensional vectors using Google’s state-of-the-art embedding models.
+Built on Llama 3.3, enabling future support for multiple Indian languages.
 
-Contextual Prompting: Engineered a custom "Legal Persona" system prompt that forces the AI to cite Articles and provide "Action Plans" for citizens.
+🛠️ Tech Stack (Free Power Stack)
+Component	Technology
+Orchestration	LangChain
+LLM (Reasoning)	Groq (Llama-3.3-70b-versatile)
+Embeddings	Google Gemini (text-embedding-004)
+Vector Store	ChromaDB (Local / In-Memory)
+UI Framework	Streamlit
+🧩 Technical Implementation
+📌 Data Ingestion
+
+Extracted text from the official Constitution of India PDF using PyPDFLoader.
+
+📌 Recursive Chunking (Parent–Child Strategy)
+
+Parent chunks preserve full Article context
+
+Child chunks improve semantic retrieval accuracy
+
+📌 Semantic Search
+
+Legal text converted into embeddings using Gemini embedding models
+
+Stored in ChromaDB for fast similarity search
+
+📌 Contextual Prompting
+
+Custom legal persona prompt ensures the AI:
+
+cites Articles
+
+explains reasoning
+
+provides structured action plans
 
 📁 Folder Structure
+NyayaAI/
+│
+├── app.py                  # Streamlit web interface
+├── src/
+│   ├── engine.py           # RAG pipeline + retrieval + Groq integration
+│   └── prompts.py          # Legal persona prompt + response format rules
+│
+├── data/                   # Source documents (Constitution PDF, processed text, etc.)
+├── requirements.txt
+└── README.md
 
-src/engine.py: The RAG logic and API integrations.[2]
+🧪 Strategic Test Questions (Lawyer Thinking Test)
 
-src/prompts.py: The legal advisory persona and instructions.[2]
+These scenario-based questions test whether NyayaAI can map messy real-life situations to the correct Constitutional Articles.
 
-app.py: The Streamlit web interface.[2][11]
+1) Labor & Wages (Economic Justice Test)
 
-data/: Source legal documents.[1][2][5][7]
+Question:
 
-Disclaimer: NyayaAI is an educational tool and does not provide formal legal advice.[1][2][12] Always consult a qualified lawyer for legal proceedings.[1]
+"I have been working as a driver for 4 months, but my owner has not paid my salary and is threatening to fire me if I ask for it. Does the Constitution protect me?"
 
+Expected Constitutional Mapping:
+
+Article 23 — Prohibition of forced labour (begar)
+
+Article 21 — Right to livelihood (part of Right to Life)
+
+2) Police & Liberty (Personal Freedom Test)
+
+Question:
+
+"The police took my brother to the station 30 hours ago without telling us why, and they haven't taken him to a judge. Is this legal?"
+
+Expected Constitutional Mapping:
+
+Article 22 — Must be produced before a magistrate within 24 hours
+
+Article 21 — Protection of life and personal liberty
+
+3) Discrimination (Social Equality Test)
+
+Question:
+
+"A local government school is refusing to admit my daughter because of our caste/religion. What can I do?"
+
+Expected Constitutional Mapping:
+
+Article 15 — Prohibition of discrimination
+
+Article 21A — Right to education (6–14 years)
+
+4) Gender & Privacy (Modern Rights Test)
+
+Question:
+
+"Can the government force me to share my private phone data without a valid reason?"
+
+Expected Constitutional Mapping:
+
+Right to Privacy under Article 21
+(as recognized in the Puttaswamy judgment)
+
+✅ Future Improvements (Optional Section)
+
+Add multilingual UI (Hindi / Marathi / Tamil etc.)
+
+Add IPC/CrPC support for criminal procedure guidance
+
+Add case-law citations (Supreme Court landmark judgments)
+
+Deploy on cloud with persistent vector DB
+
+📌 Disclaimer
+
+NyayaAI is an educational and informational tool. It is not a substitute for professional legal advice.
+For legal proceedings, consult a licensed advocate
