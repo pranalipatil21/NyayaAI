@@ -14,7 +14,7 @@ load_dotenv()
 class NyayaEngine:
     def __init__(self):
         # 1. Initialize APIs
-        self.embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
+        self.embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
         self.llm = ChatGroq(
             model=os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile"),
             temperature=0.1
