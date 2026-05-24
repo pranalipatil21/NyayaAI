@@ -9,3 +9,4 @@ python-dotenv
 streamlit
 sentence-transformers
 gtts
+protobuf~=4.25.3
