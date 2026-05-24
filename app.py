@@ -17,6 +17,11 @@ st.markdown("""
         font-family: 'Inter', sans-serif !important;
     }
 
+    /* Force all base text inside main app to be dark for high-contrast readability */
+    .stApp p, .stApp span, .stApp li, .stApp label, .stApp div[data-testid="stMarkdownContainer"] {
+        color: #1E1E1C !important;
+    }
+
     /* Headings styling */
     h1, h2, h3, .legal-header {
         font-family: 'Playfair Display', serif !important;
@@ -71,6 +76,26 @@ st.markdown("""
         color: #1E1E1C !important;
     }
 
+    /* Force all text in Sidebar to be dark and readable */
+    section[data-testid="stSidebar"] p,
+    section[data-testid="stSidebar"] span,
+    section[data-testid="stSidebar"] label,
+    section[data-testid="stSidebar"] li,
+    section[data-testid="stSidebar"] div {
+        color: #1E1E1C !important;
+    }
+
+    /* Tab Headers styling to fix visibility */
+    button[data-testid="stTab"] p {
+        color: #5D5954 !important;
+        font-weight: 500 !important;
+        font-family: 'Lora', serif !important;
+    }
+    button[data-testid="stTab"][aria-selected="true"] p {
+        color: #B89C72 !important;
+        font-weight: 700 !important;
+    }
+
     /* Chat Messages styling */
     div[data-testid="stChatMessage"] {
         background-color: #FFFFFF !important;
@@ -79,6 +104,13 @@ st.markdown("""
         padding: 16px !important;
         margin-bottom: 12px !important;
         box-shadow: 0 4px 12px rgba(0,0,0,0.015) !important;
+    }
+    
+    div[data-testid="stChatMessage"] p,
+    div[data-testid="stChatMessage"] li,
+    div[data-testid="stChatMessage"] span,
+    div[data-testid="stChatMessage"] div {
+        color: #1E1E1C !important;
     }
     
     div[data-testid="stChatMessageUser"] {
@@ -101,6 +133,10 @@ st.markdown("""
     div[data-testid="stChatInput"] textarea {
         color: #1E1E1C !important;
         font-family: 'Inter', sans-serif !important;
+    }
+    div[data-testid="stChatInput"] textarea::placeholder {
+        color: #8C6C42 !important;
+        opacity: 0.65;
     }
 
     /* Expander styling for legal sources */
@@ -140,6 +176,26 @@ st.markdown("""
         color: #4A453F;
         line-height: 1.4;
         font-style: italic;
+    }
+
+    /* Premium Styled Buttons */
+    .stButton>button {
+        background-color: #FFFFFF !important;
+        color: #8C6C42 !important;
+        border: 1px solid #B89C72 !important;
+        border-radius: 20px !important;
+        font-weight: 600 !important;
+        padding: 8px 24px !important;
+        transition: all 0.25s ease !important;
+        box-shadow: 0 2px 6px rgba(184, 156, 114, 0.15) !important;
+    }
+
+    .stButton>button:hover {
+        background-color: #B89C72 !important;
+        color: #FFFFFF !important;
+        border-color: #B89C72 !important;
+        box-shadow: 0 4px 10px rgba(184, 156, 114, 0.3) !important;
+        transform: translateY(-1px);
     }
 
     /* Disclaimer box styling */
