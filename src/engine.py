@@ -45,14 +45,26 @@ load_dotenv()
 
 class NyayaEngine:
     def __init__(self):
-        # 1. Initialize Local Embeddings (No more 429 Errors!)
+        # 1. Initialize Local Embeddings
         self.embeddings = HuggingFaceEmbeddings(
             model_name="BAAI/bge-small-en-v1.5",
             model_kwargs={'device': 'cpu'}
         )
         
+        # Candidate Groq models in priority order
+        env_model = os.getenv("GROQ_MODEL")
+        candidate_models = []
+        if env_model:
+            candidate_models.append(env_model)
+        
+        defaults = ["openai/gpt-oss-120b", "groq/compound", "qwen/qwen3.6-27b", "llama-3.3-70b-versatile", "llama-3.1-8b-instant"]
+        for m in defaults:
+            if m not in candidate_models:
+                candidate_models.append(m)
+                
+        self.candidate_models = candidate_models
         self.llm = ChatGroq(
-            model=os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile"),
+            model=self.candidate_models[0],
             temperature=0.1
         )
         
@@ -102,10 +114,39 @@ class NyayaEngine:
             
         formatted_prompt = SYSTEM_PROMPT.format(context=context) + lang_instruction
         
-        response = self.llm.invoke([
-            ("system", formatted_prompt),
-            ("human", query)
-        ])
+        # Attempt invocation with fallback model list
+        response = None
+        last_error = None
+        
+        for model_name in self.candidate_models:
+            try:
+                llm = ChatGroq(model=model_name, temperature=0.1)
+                response = llm.invoke([
+                    ("system", formatted_prompt),
+                    ("human", query)
+                ])
+                self.llm = llm  # Store working model instance
+                break
+            except Exception as e:
+                logging.warning(f"Groq model '{model_name}' failed: {e}. Trying next candidate...")
+                last_error = e
+
+        # Optional secondary fallback: Google Gemini
+        if response is None:
+            google_key = os.getenv("GOOGLE_API_KEY")
+            if google_key:
+                try:
+                    from langchain_google_genai import ChatGoogleGenerativeAI
+                    gemini_llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", google_api_key=google_key, temperature=0.1)
+                    response = gemini_llm.invoke([
+                        ("system", formatted_prompt),
+                        ("human", query)
+                    ])
+                except Exception as ge:
+                    logging.error(f"Gemini fallback failed: {ge}")
+
+        if response is None:
+            raise last_error or RuntimeError("All available LLM models failed to process query.")
         
         # Structure source documents for the UI to display explainability information
         sources = []
